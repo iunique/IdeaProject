@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>My blog</title>
+<style type="text/css">
+body {
+	padding: 0;
+	margin: 0;
+}
+a {
+	text-decoration: none;
+}
+#bgm {
+	width: 1500px;
+	height: 900px;
+	background: url(imgs/b5.jpg)
+}
+.tit {
+	text-align: center;
+	color: #9F9;
+	margin-bottom: 10px;
+}
+#ti {
+	font-size: 50px;
+	font-family: "楷体";
+	color: #FF0;
+}
+.pic {
+	border: #999 3px solid;
+	width:50px;
+	height:50px;
+	position:relative;
+	bottom:-10px;
+}
+#ti:hover {
+	color: #C3F
+}
+ul {
+	list-style: none;
+}
+#biao li {
+	list-style-type: none;
+	float: left;
+	margin-right: 10px;
+	border: #000 2px solid
+}
+#biao li a {
+	background-color: #999;
+	display: block;
+	font-size: 24px;
+	text-align: center;
+	width: 150px;
+	transition: width 2s
+}
+#biao ul a:hover {
+	background-color: #FC6;
+	width: 200px
+}
+#la {
+	width: 180px;
+	height: 300px;
+	background: url(imgs/t1.jpg);
+	position: relative;
+	left: -184px;
+	margin-top: 50px;
+	border: #999 2px solid;
+	text-align: center;
+}
+#kuang {
+	width: 20px;
+	height: 130px;
+	background-color: #09F;
+	margin-left: 184px;
+	margin-top: -170px;
+}
+#la a {
+	font-size: 20px;
+	margin: 10px auto 0px auto;
+	display: block;
+	color: #FFF;
+}
+#la a:hover {
+	color: #93C
+}
+#main {
+	position: absolute;
+	top: 150px;
+	left: 230px;
+	width: 1000px;
+	height: 700px;
+	background-color: #FFF;
+	border: #000 2px solid;
+	opacity: 0.5;
+	color:#000;
+}
+#clock {
+	width: 120px;
+	background-color: #FFF;
+	position: absolute;
+	top: 100px;
+	left: 50px;
+	border: #999 2px solid;
+	margin: 0 auto;
+	opacity: 0.5;
+}
+#text{ padding:0 60px;}
+</style>
+<script src="jquery-3.2.1.js">
+</script>
+<script type="text/javascript">
+var dd=null;
+$(document).ready(function(){
+	var bb=document.getElementById("la");
+	bb.onmouseover=function()
+	{
+		on(-4);	
+		bb.style.color="white";
+	};
+	bb.onmouseout=function()
+	{
+		on(-184);
+		bb.style.color="black";
+	};
+	var el=document.getElementById("main");
+	el.onmouseover=function()
+	{
+		onl(this,90);
+	};
+	el.onmouseout=function()
+	{
+		onl(this,50);
+	};
+	setInterval(function(){
+	var my=new Date();
+	var y=my.getFullYear();
+	var m=my.getMonth()+1;
+	var d=my.getDate();
+	var day=my.getDay();
+	switch(day)
+	{
+		case 0:day="星期日";break;
+		case 1:day="星期一";break;
+		case 2:day="星期二";break;
+		case 3:day="星期三";break;
+		case 4:day="星期四";break;
+		case 5:day="星期五";break;
+		case 6:day="星期六";break;
+	}
+	var h=my.getHours();
+	var mi=my.getMinutes();
+	var se=my.getSeconds();
+	mi=mi<10?"0"+mi:mi;
+	se=se<10?"0"+se:se;
+	var temp=document.getElementById('clock');
+	temp.innerHTML=y+"年"+m+"月"+d+"日"+"时间:"+h+":"+mi+":"+se;
+		},1000);
+	});
+function on(tar)
+{
+	clearTimeout(dd);
+	dd=setInterval(function()
+	{
+		var s=document.getElementById("la");
+		var sp=(tar-s.offsetLeft)/15;
+		sp=sp>0?Math.ceil(sp):Math.floor(sp);
+		if(s.offsetLeft!=tar)
+		s.style.left=s.offsetLeft+sp+'px';
+	},30);
+}
+var add1=0;
+function changeb()
+{
+	var a1=document.getElementById("bgm");
+	switch(add1%5)
+	{
+		case 0:a1.style.backgroundImage="url(imgs/b1.jpg)";break;
+		case 1:a1.style.backgroundImage="url(imgs/b2.jpg)";break;
+		case 2:a1.style.backgroundImage="url(imgs/b3.jpg)";break;
+		case 3:a1.style.backgroundImage="url(imgs/b4.jpg)";break;
+		case 4:a1.style.backgroundImage="url(imgs/b5.jpg)";break;
+	}
+	if(add1==0)
+	{
+		alert("多点几次试试( • ̀ω•́ )✧");
+		var ss=document.getElementById("ti");
+		ss.innerHTML="My Blog";
+	}
+	add1++;
+}
+var oo=50;
+var intv=null;
+function onl(obj,tar)
+{
+	clearTimeout(intv);
+	intv=setInterval(function(){
+		var sp=(tar-oo)/20;
+		sp=sp>0?Math.ceil(sp):Math.floor(sp);
+		if(oo!=tar)
+		{
+			oo=oo+sp;
+			obj.style.opacity=oo/100;
+		}
+		},30);
+}
+</script>
+</head>
+
+<body>
+<div id="bgm">
+	<audio controls="controls" autoplay="autoplay">
+       	<source src="双笙 - 心做し.mp3" type="audio/mpeg" />
+    </audio>
+  <div class="tit"> <a href="#" id="ti">点击右边试试--></a><img src="imgs/g1.gif" class="pic" onclick="changeb()"/></div>
+  <div id="biao" style=" overflow:hidden;">
+    <ul style="margin:0 200px">
+      <li><a href="#">首   页</a></li>
+      <li><a href="http://blog.csdn.net/qq_37497322" target="_blank">日   志</a></li>
+      <li><a href="http://blog.csdn.net/qq_37497322/article/category/6952336" target="_blank">ACM题解</a></li>
+      <li><a href="http://blog.csdn.net/qq_37497322/article/category/7231527" target="_blank">开发</a></li>
+      <li><a href="https://www.bilibili.com/" target="_blank">动   漫</a></li>
+      <li><a href="#">留   言</a></li>
+    </ul>
+  </div>
+  <marquee scrollamount="2" width="80%" scrolldelay="30" onmouseover="javascript:this.stop();" onmouseout="javascript:this.start();">
+  <b style="margin-right:120px; color:#FFF; font-size:20px;">哔哩哔哩干杯[]~(￣▽￣)~*</b>
+  </marquee>
+  <div id="wang" style=" width:300px; height:400px; overflow:hidden;">
+    <div id="la"> <a href="http://www.imooc.com/" target="_blank" title="慕课网">慕课网</a> <a href="http://www.csdn.net/" target="_blank" title="CSDN">CSDN</a> <a href="https://github.com/" target="_blank" title="Github">Github</a> <a href="http://acm.wust.edu.cn/" target="_blank" title="ACM">ACM</a> <a href="https://www.zhihu.com/" target="_blank" title="知乎">知乎</a> <a href="https://www.w3cschool.cn/" target="_blank" title="W3CSchool">W3Cschool</a> <a href="http://www.bilibili.com/" target="_blank" title="bilibili">bilibili</a>
+      <div id="kuang" style="border:2px #0FF solid"> 学习使我快乐 </div>
+    </div>
+  </div>
+  <div id="main">
+     <h1 style="text-align:center">首 页</h1>
+     <div id="text">
+        <p>HJY非常懒，这里啥也没有(～￣▽￣)～</p>
+        <p>因为还没学后台语言，所以博客就用CSDN凑合下吧,留言板功能要等我学会了才能用(〃ﾉωﾉ)</p>
+     </div>
+  </div>
+  <div id="clock"> </div>
+</div>
+</div>
+</body>
+</html>
