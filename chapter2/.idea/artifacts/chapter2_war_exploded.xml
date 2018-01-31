@@ -1,0 +1,35 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="chapter2:war exploded">
+    <output-path>$PROJECT_DIR$/target/chapter2-1.0</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="chapter2" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.springframework:spring-beans:5.0.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-core:5.0.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-jcl:5.0.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context:5.0.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-aop:5.0.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-expression:5.0.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context-support:5.0.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:5.0.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-tx:5.0.2.RELEASE" />
+          <element id="library" level="project" name="Maven: commons-dbcp:commons-dbcp:1.4" />
+          <element id="library" level="project" name="Maven: commons-pool:commons-pool:1.5.4" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.29" />
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.8.5" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:5.0.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-web:5.0.2.RELEASE" />
+          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
+          <element id="library" level="project" name="Maven: org.apache.taglibs:taglibs-standard-impl:1.2.5" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/chapter2-1.0/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="chapter2/web/Web" />
+    </root>
+  </artifact>
+</component>
