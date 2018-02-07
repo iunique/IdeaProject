@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="test">
+    <!-- 需求：通过id查询用户 -->
+    <select id="findUserById" parameterType="int" resultType="servlet.User">
+        select * from user where id = #{id}
+    </select>
+    <select id="findUserByName" parameterType="java.lang.String" resultType="servlet.User">
+        select * from user where name like '%${value}%'
+    </select>
+    <insert id="insertUser" parameterType="servlet.User">
+        insert into user(name,password) values(#{name},#{password})
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+        delete from user where id=#{id}
+    </delete>
+    <update id="updateUser" parameterType="servlet.User">
+        update user set name=#{name},password=#{password} where id=#{id}
+    </update>
+</mapper>
