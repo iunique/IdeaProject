@@ -5,15 +5,14 @@ import servlet.User;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
 
 public class UserDaoTest {
-    @Test
+    @Test//测试单例查找
     public void test_findUserById() throws Exception {
         User user = UserDao.findUserById(1);
         System.out.println("id:" + user.getId() + " name:" + user.getName() + " password:" + user.getPassword());
     }
-    @Test
+    @Test//测试多例查找
     public void test_findUserByName()throws Exception
     {
         List<User>res=UserDao.findUserByName("hjy");
@@ -25,7 +24,7 @@ public class UserDaoTest {
             }
         }
     }
-    @Test
+    @Test//测试插入操作
     public void  test_insertUser()throws Exception
     {
         User user=new User();
@@ -34,13 +33,13 @@ public class UserDaoTest {
         UserDao.insertUser(user);
         test_findUserByName();
     }
-    @Test
+    @Test//测试删除操作
     public void test_deleteUser()throws Exception
     {
         UserDao.deleteUser(1);
         test_findUserByName();
     }
-    @Test
+    @Test//测试更新操作
     public void test_updateUser()throws Exception
     {
         User user=new User();
