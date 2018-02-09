@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="test">
+    <!-- 通过id查询用户 -->
+    <select id="findUserById" parameterType="int" resultType="domain.User">
+        select * from user where id = #{id}
+    </select>
+    <!--通过name用户-->
+    <select id="findUserByName" parameterType="java.lang.String" resultType="domain.User">
+        select * from user where name like '${value}'
+    </select>
+    <!--根据name和password查询User-->
+    <select id="checkLogin" parameterType="domain.User" resultType="domain.User">
+        select * from user where name=#{name} and password=#{password}
+    </select>
+    <!--插入用户信息-->
+    <insert id="insertUser" parameterType="domain.User">
+        insert into user(name,age,password) values(#{name},#{age},#{password})
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            select last_insert_id()
+            --             这里是对于主键属性的id进行赋值
+        </selectKey>
+    </insert>
+    <!--删除用户信息-->
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+        delete from user where id=#{id}
+    </delete>
+    <!--更新用户信息-->
+    <update id="updateUser" parameterType="domain.User">
+        update user set name=#{name},age=#{age},password=#{password} where id=#{id}
+    </update>
+</mapper>
