@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dom">
+    <resultMap type="entity.det" id="det">
+        <result column="num" property="num" javaType="int"/>
+        <result column="id" property="id" javaType="int"/>
+        <result column="opt" property="opt" javaType="string"/>
+        <result column="value" property="value" javaType="int"/>
+        <result column="username" property="username" javaType="string"/>
+    </resultMap>
+    <resultMap type="entity.user" id="user">
+        <result column="username" property="username" javaType="string"/>
+        <result column="pwd" property="pwd" javaType="string"/>
+    </resultMap>
+    <resultMap type="entity.inf" id="inf">
+        <result column="num" property="num" javaType="int"/>
+        <result column="username" property="username" javaType="string"/>
+        <result column="des" property="des" javaType="string"/>
+    </resultMap>
+    <!--查询用户是否存在-->
+    <select id="findUser" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select COUNT(*) from user where username = '${value}'
+    </select>
+    <!--返回用户密码-->
+    <select id="findPwd" parameterType="java.lang.String" resultType="java.lang.String">
+        select pwd from user where username = '${value}'
+    </select>
+    <!--插入一个用户-->
+    <insert id="insertUser" parameterType="entity.user">
+        insert into user values(#{username},#{pwd})
+    </insert>
+    <!-- 通过id查询题目描述 -->
+    <select id="findDes" parameterType="java.lang.String" resultMap="inf">
+        select * from inf where username = '${value}' order by num
+    </select>
+    <!--通过num查询响应题目-->
+    <select id="findOneDes" parameterType="entity.inf" resultMap="inf">
+        select * from inf where username = #{username} and num= #{num}
+    </select>
+    <!--通过num查询所有题目的选项-->
+    <select id="findOptByNum" parameterType="entity.inf" resultMap="det">
+        select * from det where num = #{num} and username = #{username} order by id
+    </select>
+    <!--查询一个调查表中num最大值-->
+    <select id="findMaxNum" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select MAX(num) from inf where username = '${value}'
+    </select>
+    <!--查询一个题中选项id的最大值-->
+    <select id="findMaxId" parameterType="entity.inf" resultType="java.lang.Integer">
+        select MAX(id) from det where username = #{username} and num = #{num}
+    </select>
+    <!--插入题目-->
+    <insert id="insertInf" parameterType="entity.inf">
+        insert into inf values(#{num},#{username},#{des})
+    </insert>
+    <!--插入题目选项-->
+    <insert id="insertOpt" parameterType="entity.det">
+        insert into det values(#{num},#{id},#{opt},#{username},default)
+    </insert>
+    <!--更新选题描述-->
+    <update id="updateDes" parameterType="entity.inf">
+        update inf set des = #{des} where username = #{username} and num = #{num}
+    </update>
+    <!--更新选项描述-->
+    <update id="updateOpt" parameterType="entity.det">
+        update det set opt = #{opt} where username = #{username} and id = #{id} and num = #{num}
+    </update>
+    <!--选项选择情况-->
+    <update id="updateRes" parameterType="entity.det">
+        update det set value = value+1 where username = #{username} and id = #{id} and num = #{num}
+    </update>
+    <!--删除题目信息-->
+    <delete id="deleteDes" parameterType="entity.inf">
+        delete from inf where num = #{num} and username =#{username}
+    </delete>
+    <!--删除单个选项信息-->
+    <delete id="deleteOneOpt" parameterType="entity.det">
+        delete from det where id= #{id} and username =#{username} and num = #{num}
+    </delete>
+    <!--删除所有选项-->
+    <delete id="deleteAllOpt" parameterType="entity.inf">
+        delete from det where username =#{username} and num = #{num}
+    </delete>
+</mapper>

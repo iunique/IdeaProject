@@ -1,0 +1,36 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="research:war exploded">
+    <output-path>$PROJECT_DIR$/target/research</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="research" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.webjars:bootstrap:4.1.0" />
+          <element id="library" level="project" name="Maven: org.webjars:jquery:3.0.0" />
+          <element id="library" level="project" name="Maven: org.webjars:popper.js:1.14.1" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:5.0.2.RELEASE" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.29" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:1.3.1" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.3.0" />
+          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-web:5.0.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-core:5.0.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-jcl:5.0.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context:5.0.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context-support:5.0.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-beans:5.0.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-expression:5.0.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-aop:5.0.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.webjars.bower:jquery:3.3.1" />
+          <element id="library" level="project" name="Maven: javax.el:javax.el-api:3.0.0" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/research/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="research/web/Web" />
+    </root>
+  </artifact>
+</component>
