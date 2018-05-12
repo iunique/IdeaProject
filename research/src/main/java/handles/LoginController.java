@@ -9,10 +9,12 @@ import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 @Controller
@@ -44,6 +46,16 @@ public class LoginController {
             if((t.getPwd()).equals(sql.findPwd(t.getUsername()))) {
                 session.setAttribute("confirm", "true");
                 session.setAttribute("username", t.getUsername());
+                String name= URLEncoder.encode(t.getUsername(),"UTF-8");
+                String pwd= URLEncoder.encode(t.getPwd(),"UTF-8");
+                Cookie c1=new Cookie("username",t.getUsername());
+                c1.setMaxAge(30*24*3600);
+                c1.setPath("/");
+                resp.addCookie(c1);
+                Cookie c2=new Cookie("pwd",t.getPwd());
+                c2.setMaxAge(30*24*3600);
+                c2.setPath("/");
+                resp.addCookie(c2);
             }
             else
             {
