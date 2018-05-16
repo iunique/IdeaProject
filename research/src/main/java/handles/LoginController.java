@@ -7,6 +7,7 @@ import entity.inf;
 import entity.user;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.Cookie;
@@ -30,6 +31,12 @@ public class LoginController {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=UTF-8");
         return "register";
+    }
+    @RequestMapping("/index")
+    public String index(HttpServletRequest req, HttpServletResponse resp) throws UnsupportedEncodingException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html; charset=UTF-8");
+        return "index";
     }
     @RequestMapping("/servlets/login")
     public String login(HttpServletRequest req, HttpServletResponse resp, HttpSession session, user t) throws UnsupportedEncodingException {
@@ -179,5 +186,11 @@ public class LoginController {
         resp.setContentType("text/html; charset=UTF-8");
         sql.deleteOneOpt(t);
         return "create_tab";
+    }
+    @RequestMapping("/re/{username}")
+    public String page(@PathVariable String username,HttpSession session)
+    {
+        session.setAttribute("username",username);
+        return "/tab_research";
     }
 }

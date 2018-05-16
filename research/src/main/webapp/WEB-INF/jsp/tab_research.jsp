@@ -9,12 +9,22 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<!-- 新 Bootstrap 核心 CSS 文件 -->
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- 可选的Bootstrap主题文件（一般不使用） -->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>问卷调查</title>
 </head>
-<body>
+<body style="background-image: url('/img/b3.jpeg');width: 1920px;height: 1080px">
+    <h2 class="text-center" style="color: darkviolet">问卷调查</h2>
     <form action="/servlets/handle_submit" method="post">
     <%
         String username=(String)session.getAttribute("username");
@@ -22,19 +32,29 @@
         for(int i=0;i<l.size();i++)
         {
     %>
-    <p><%=i+1%>.<%=l.get(i).getDes()%></p>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title"><%=i+1%>.<%=l.get(i).getDes()%></h3>
+            </div>
+            <div class="panel-body">
     <%
             List<det>lz=sql.findOptByNum(l.get(i));
             for(int j=0;j<lz.size();j++)
             {
                 char c=(char)(65+j);
     %>
-    <%=c%>.<input type="radio" name="opt<%=lz.get(j).getNum()%>" value="<%=lz.get(j).getId()%>"><%=lz.get(j).getOpt()%><br/>
+                <div>
+                    <%=c%>.<input type="radio" name="opt<%=lz.get(j).getNum()%>" value="<%=lz.get(j).getId()%>"><%=lz.get(j).getOpt()%>
+                </div>
     <%
             }
+    %>
+            </div>
+        </div>
+    <%
         }
     %>
-    <button type="submit" >提交</button>
-    </form>
+    <button type="submit" class="btn btn-info">提交</button>
+        </form>
 </body>
 </html>
