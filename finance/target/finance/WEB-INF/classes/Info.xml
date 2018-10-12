@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="domain3">
+    <resultMap type="entity.Info" id="info">
+        <result column="tab_no" property="tab_no" javaType="int"/>
+        <result column="info_no" property="info_no" javaType="int"/>
+        <result column="id" property="id" javaType="string"/>
+        <result column="tab_name" property="tab_name" javaType="string"/>
+        <result column="dat" property="dat" jdbcType="DATE" javaType="string"/>
+        <result column="amount" property="amount" javaType="double"/>
+        <result column="detail" property="detail" javaType="string"/>
+    </resultMap>
+    <!--查询一个用户报表中所有的交易记录 -->
+    <select id="findAllInfo" parameterType="java.lang.Integer" resultMap="info">
+        select * from info where tab_no ='${value}'
+    </select>
+    <!--通过年份和月份查询一份表的交易记录-->
+    <select id="findInfoByMessage" parameterType="entity.Message" resultMap="info">
+        select * from info where id = #{id} and tab_name = #{name} and year(dat) = #{year} and month(dat) = #{month}
+    </select>
+    <!--插入交易信息-->
+    <insert id="insertInfo" parameterType="entity.Info">
+        insert into info values(#{tab_no},default,#{id},#{tab_name},#{amount},str_to_date(#{dat},'%Y-%m-%d'),#{detail})
+    </insert>
+    <!--删除交易信息-->
+    <delete id="deleteOneInfo" parameterType="java.lang.Integer">
+        delete from info where info_no = '${value}'
+    </delete>
+    <!--更新报表信息-->
+    <update id="updateInfo" parameterType="entity.Info">
+        update info set detail = #{detail},dat = #{dat} ,amount = #{amount},tab_name=#{tab_name } where info_no = #{info_no}
+    </update>
+    <!--级联更新表名-->
+    <update id="updateInfoName" parameterType="entity.Tab">
+        update info set tab_name = #{tab_name} where tab_no = #{tab_no}
+    </update>
+</mapper>

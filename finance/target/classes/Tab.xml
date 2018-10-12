@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="domain2">
+    <resultMap type="entity.Tab" id="tab">
+        <result column="id" property="id" javaType="string"/>
+        <result column="tab_no" property="tab_no" javaType="int"/>
+        <result column="tab_name" property="tab_name" javaType="string"/>
+    </resultMap>
+    <!--查询一个用户拥有的报表-->
+    <select id="findTabById" parameterType="java.lang.String" resultMap="tab">
+        select * from tab where id = '${value}'
+    </select>
+    <!--根据报表名称和id查询no-->
+    <select id="findTabByName" parameterType="entity.Tab" resultType="Integer">
+        select tab_no from tab where id = #{id} and tab_name = #{tab_name}
+    </select>
+    <!--插入一份报表-->
+    <insert id="insertTab" parameterType="entity.Tab">
+        insert into tab values(#{id},default,#{tab_name})
+    </insert>
+    <!--删除一份报表-->
+    <delete id="deleteTab" parameterType="java.lang.Integer">
+        delete from tab where tab_no ='${value}'
+    </delete>
+    <!--更新报表信息-->
+    <update id="updateTab" parameterType="entity.Tab">
+        update tab set tab_name = #{tab_name} where tab_no = #{tab_no}
+    </update>
+</mapper>
